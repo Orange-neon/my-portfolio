@@ -363,13 +363,24 @@
             border-bottom: 1px solid var(--gray-200);
         }
 
-        .video-container iframe {
+        .video-container video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: 0;
+            background-color: #000;
+        }
+
+        .video-fallback {
+            padding: 0.9rem 1rem 0;
+            text-align: center;
+        }
+
+        .video-fallback a {
+            display: inline-block;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -518,6 +529,24 @@
                 ${getFooter()}
             `;
         }
+
+        function getProjectVideo(title, fileId, fileName) {
+            const videoUrl = `videos/${fileName}`;
+            const viewUrl = `https://drive.google.com/file/d/${fileId}/view`;
+
+            return `
+                <div class="video-container">
+                    <video controls preload="metadata" playsinline title="${title} video">
+                        <source src="${videoUrl}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-fallback">
+                    <a href="${viewUrl}" target="_blank" rel="noopener">Open backup in Google Drive</a>
+                </div>
+            `;
+        }
+
         function getProjectsPage() {
             return `
                 ${getHeader()}
@@ -530,13 +559,7 @@
                                 <div class="project-card-header">
                                     <h3>Pyronimbus</h3>
                                 </div>
-                                <div class="video-container">
-                                    <iframe 
-                                        src="https://drive.google.com/file/d/1po-0RqGPRMYayEcXLNP860NCP_Rf18lj/preview" 
-                                        allow="autoplay"
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
+                                ${getProjectVideo('Pyronimbus', '1po-0RqGPRMYayEcXLNP860NCP_Rf18lj', 'pyronimbus.mp4')}
                                 <div class="project-card-body">
                                     <p>A survival game built with MIT App Inventor. Players dodge obstacles, teleport, and gain shields.</p>
                                     <p><strong>Skills:</strong> Control flow, functions, data structures</p>
@@ -547,13 +570,7 @@
                                 <div class="project-card-header">
                                     <h3>Emergency Training Game</h3>
                                 </div>
-                                <div class="video-container">
-                                    <iframe 
-                                        src="https://drive.google.com/file/d/16uWmmPcOZyGgy9eOWtcpPKskQnHIHLFC/preview" 
-                                        allow="autoplay" 
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
+                                ${getProjectVideo('Emergency Training Game', '16uWmmPcOZyGgy9eOWtcpPKskQnHIHLFC', 'emergency-training-game.mp4')}
                                 <div class="project-card-body">
                                     <p>A training simulation game designed to prepare users for emergency situations. Players understand the importance of staying calm by acting as the teacher of a classroom, attempting to order all the students out.</p>
                                     <p><strong>Skills:</strong> Mathematical Operations, event listeners, functions</p>
@@ -564,13 +581,7 @@
                                 <div class="project-card-header">
                                     <h3>Robotics Moving Algorithms</h3>
                                 </div>
-                                <div class="video-container">
-                                    <iframe 
-                                        src="https://drive.google.com/file/d/1TUv2aissi_EYrgHqCvP_nBShvOyJxxvL/preview" 
-                                        allow="autoplay" 
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
+                                ${getProjectVideo('Robotics Moving Algorithms', '1TUv2aissi_EYrgHqCvP_nBShvOyJxxvL', 'robotics-moving-algorithms.mp4')}
                                 <div class="project-card-body">
                                     <p>A pair of algorithms allowing for corrective turns and movement in a line. </p>
                                     <p><strong>Skills:</strong> Mathematical Algorithms, sensor integration, functions</p>
